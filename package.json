@@ -1,11 +1,10 @@
 {
-	"name": "get-post-demo",
-	"version": "0.0.2",
+	"name": "imagesort",
+	"version": "0.1.0",
 	"dependencies": {
 		"body-parser": "^1.18.2",
 		"express": "^4.16.2",
 		"glob": "^8.0.3",
-		"globby": "^13.1.2",
 		"sharp": "^0.31.0"
 	},
 	"scripts": {
