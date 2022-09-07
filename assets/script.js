@@ -4,7 +4,8 @@ $(() => {
 	let i = 0;
 
 	$.get("/initials", (response) => {
-		response = JSON.parse(response);
+		console.log(response);
+		// response = JSON.parse(response);
 		response.Albums.forEach(element => {
 			let b = document.createElement("button");
 			b.type = "button";
@@ -17,7 +18,6 @@ $(() => {
 		document.getElementById("GoToImage-Index").value = response.AI;
 		document.getElementById("GoToImage-Index").placeholder = " 0 - " + response.AI;
 
-		console.log(response);
 		images = response.Images;
 
 		$("#TheInput").attr("src", images[i]);
@@ -29,7 +29,7 @@ $(() => {
 			toggleDragModeOnDblclick: false,
 		});
 
-		$(".AlbumButton").on("click", function () {
+		$(".AlbumButton").on("click", () => {
 			$.post("/submit",
 				{
 					"Image": images[i],
@@ -37,7 +37,6 @@ $(() => {
 					"Data": JSON.stringify(cropper.getData())
 				},
 				(response) => {
-					console.log(response);
 					i++;
 					if (typeof images[i] !== "undefined") {
 						cropper.replace(images[i]);
@@ -54,13 +53,13 @@ $(() => {
 
 	});
 
-	// $("#DoCrop").on("click", function () {
+	// $("#DoCrop").on("click", () => {
 	// 	ShowToast("Did you mean to Double-Click?");
 	// });
 
-	$("#DoCrop").on("dblclick", function () {
+	$("#DoCrop").on("dblclick", () => {
 		$("#TheButtons").hide();
-		let DoingCropToast =  ShowToast("Doing Crop. Wait!", undefined, 1200000);
+		let DoingCropToast = ShowToast("Doing Crop. Wait!", undefined, 1200000);
 		$.get("/crop",
 			(response) => {
 				ShowToast("Crop Done! Now go get some coffee!", undefined, 1200000);
@@ -73,7 +72,7 @@ $(() => {
 		});
 	});
 
-	$("#GoToImage-Button").on("click", function () {
+	$("#GoToImage-Button").on("click", () => {
 		let NewIndex = $("#GoToImage-Index").val();
 
 		if (typeof images[NewIndex] !== "undefined") {
@@ -86,7 +85,7 @@ $(() => {
 		}
 	});
 
-	$("#Preset-Square").on("click", function () {
+	$("#Preset-Square").on("click", () => {
 		let ImageData = cropper.getImageData();
 		let a = Math.min(ImageData.naturalWidth, ImageData.naturalHeight);
 
@@ -98,7 +97,7 @@ $(() => {
 		});
 	});
 
-	$("#Preset-IGStory").on("click", function () {
+	$("#Preset-IGStory").on("click", () => {
 		cropper.setData({
 			x: 0,
 			y: 200,

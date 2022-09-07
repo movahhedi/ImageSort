@@ -1,7 +1,6 @@
 const
 	bodyParser = require("body-parser"),
 	express = require("express"),
-	app = express(),
 	glob = require("glob"),
 	fs = require("fs"),
 	fsPromises = require('fs').promises,
@@ -10,6 +9,7 @@ const
 ;
 
 const
+	app = express(),
 	OutputFile = "data/output.json",
 	AlbumsFile = "data/Albums.json",
 	AIFile = "data/AI.txt",
@@ -18,7 +18,7 @@ const
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use("data/input", express.static("data/input"));
+app.use("/data/input", express.static("data/input"));
 app.use("/assets", express.static("assets"));
 
 app.get("/", (req, res) => {
@@ -109,6 +109,8 @@ app.get("/crop", (req, res) => {
 				.metadata()
 
 				.then((metadata) => {
+					// Based on EXIF rotation metadata, get the right-side-up width and height
+					// https://sharp.pixelplumbing.com/api-input#metadata
 					if ((metadata.orientation || 0) >= 5) {
 						metadata = {...metadata, width: metadata.height, height: metadata.width };
 						CropData = {...CropData, x: CropData.y, y: CropData.x, width: CropData.height, height: CropData.width };
@@ -118,7 +120,7 @@ app.get("/crop", (req, res) => {
 
 				.then(((AI, values) => {
 					const [metadata, CropData] = values;
-					if (CropData.x == 0 && CropData.y == 0 && CropData.width == metadata.width && CropData.height == metadata.height) {
+					if ((CropData.x == 0 && CropData.y == 0 && CropData.width == metadata.width && CropData.height == metadata.height) || (CropData.width == 0 || CropData.height == 0)) {
 						return fsPromises.copyFile(ImagePath, OutputPath);
 					}
 					else {
