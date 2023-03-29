@@ -1,0 +1,259 @@
+#ToastBox {
+	min-width: 16vw;
+	text-align: center;
+	position: fixed;
+	z-index: 3000;
+	bottom: 0.6vw;
+	inset-inline-start: 0.6vw;
+	font-size: 1.1vw;
+}
+@media only screen and (max-width: 500px) {
+	#ToastBox {
+		width: 96%;
+		margin: 2%;
+		font-size: 3.3vw;
+	}
+}
+
+.Toast {
+	display: block;
+	font-size: 1.1vw;
+	min-width: 20vw;
+	text-align: center;
+	border-radius: 1vw;
+	z-index: 3000;
+	position: relative;
+	font-family: "Vazirmatn FD", "Vazirmatn", "Vazir FD", "Vazir", "Segoe UI", "Segoe Pro", sans-serif;
+	/* animation: ToastFadeIn 0.5s, ToastFadeOut 0.5s 4.5s forwards; */
+	margin-bottom: 0.6vw;
+	transform-style: preserve-3d;
+	transition: 500ms;
+	animation: ToastFadeIn 0.2s ease 1 forwards;
+}
+@media only screen and (max-width: 500px) {
+	.Toast {
+		width: 96%;
+		margin: 2%;
+		border-radius: 3vw;
+		font-size: 3.3vw;
+		margin-bottom: 1.8vw;
+	}
+}
+.Toast.Bye {
+	animation: ToastFadeOut 0.2s ease 0.1s 1 forwards;
+}
+
+.ToastContent {
+	background-color: #007fff;
+	color: #f9f7f7;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	padding: 1vw 1.5vw;
+	border-radius: 16px;
+	overflow: hidden;
+}
+@media only screen and (max-width: 500px) {
+	.ToastContent {
+		padding: 4vw 4.5vw;
+	}
+}
+
+.ToastTitle {
+	font-size: 1.4vw;
+	font-weight: 700;
+	width: 100%;
+	text-align: center;
+	margin-bottom: 0.8vw;
+}
+@media only screen and (max-width: 500px) {
+	.ToastTitle {
+		font-size: 25px;
+		margin-bottom: 2.4vw;
+	}
+}
+
+.ToastText {
+	font-size: 16px;
+	width: 100%;
+	text-align: center;
+}
+@media only screen and (max-width: 500px) {
+	.ToastText {
+		font-size: 17px;
+	}
+}
+
+.ToastButtonBox {
+	margin-top: 1vw;
+	display: flex;
+	position: relative;
+	width: 100%;
+	box-sizing: border-box;
+	justify-content: end;
+	align-content: flex-end;
+}
+@media only screen and (max-width: 500px) {
+	.ToastButtonBox {
+		margin-top: 3vw;
+	}
+}
+
+.ToastButton {
+	display: block;
+	position: relative;
+	font-size: 16px;
+	font-family: "Vazirmatn FD", "Vazirmatn", "Vazir FD", "Vazir", "Segoe UI", "Segoe Pro", sans-serif;
+	font-weight: 700;
+	text-align: center;
+	margin-inline-start: 0.75vw;
+	padding: 0.5vw 1vw;
+	width: fit-content;
+	max-width: 100%;
+	min-width: 3vw;
+	background-color: transparent;
+	color: #f9f7f7;
+	border: 1px solid #f9f7f7;
+	border-radius: 50px;
+	box-sizing: border-box;
+	cursor: pointer;
+	-webkit-appearance: none;
+	text-decoration: none;
+	outline: 0;
+	transition: all 0.25s cubic-bezier(0.53, 0.01, 0.35, 1.5);
+}
+.ToastButton.Filled {
+	color: #007fff;
+	background-color: #f9f7f7;
+	border-color: #007fff;
+}
+.ToastButton.Outlined {
+	background-color: transparent;
+	color: #f9f7f7;
+	border: 1px solid #f9f7f7;
+}
+.ToastButton.Low {
+	background-color: transparent;
+	color: #f9f7f7;
+	border: none;
+}
+.ToastButton:hover {
+	box-shadow: inset 0 0 10vw 10vw rgba(255, 255, 255, 0.2);
+}
+.ToastButton:disabled,
+.ToastButton.Disabled {
+	background-color: #757575;
+	border-color: #757575;
+	opacity: 0.75;
+	cursor: default;
+}
+.ToastButton:focus {
+	background-color: #f9f7f7;
+	color: #007fff;
+}
+@media only screen and (max-width: 500px) {
+	.ToastButton {
+		font-size: 18px;
+		margin-inline-start: 1.5vw;
+		padding: 2.5vw 4vw;
+		min-width: 18vw;
+	}
+}
+
+.ToastActionBox {
+	position: absolute;
+	inset-block-start: 0;
+	inset-inline-end: 0;
+	background-color: #007fff;
+	transform: translateZ(-1px);
+	border-radius: 1vw 1vw 0 0;
+	padding: 0.2vw 0.5vw 0.7vw;
+	font-size: 0;
+	z-index: -1;
+	transition: 500ms;
+	animation: none;
+	visibility: hidden;
+}
+@media only screen and (max-width: 500px) {
+	.ToastActionBox {
+		padding: 0.6vw 1.5vw 2vw;
+		border-radius: 16px 16px 0 0;
+	}
+}
+
+.ToastActionBox:hover,
+.Toast:hover .ToastActionBox {
+	visibility: visible;
+	transform: translateZ(-1px) translateY(-60%);
+}
+@media only screen and (max-width: 500px) {
+	.ToastActionBox:hover,
+	.Toast:hover .ToastActionBox {
+		transform: translateZ(-1px) translateY(-70%);
+	}
+}
+
+.ToastAction {
+	width: 1.1vw;
+	aspect-ratio: 1/1;
+	-webkit-mask-repeat: no-repeat;
+	-webkit-mask-position: center;
+	mask-repeat: no-repeat;
+	mask-position: center;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	margin: 0.3vw 0.4vw;
+	background-color: #fff;
+}
+.ToastAction.Pin {
+	-webkit-mask-image: url(../../admin/assets/icons/thumbtack.svg);
+	mask-image: url(../../admin/assets/icons/thumbtack.svg);
+}
+.ToastAction.Dismiss {
+	-webkit-mask-image: url(../../admin/assets/icons/times.svg);
+	mask-image: url(../../admin/assets/icons/times.svg);
+}
+@media only screen and (max-width: 500px) {
+	.ToastAction {
+		width: 5vw;
+		margin: 2vw 2.5vw;
+	}
+}
+
+.ToastProgressBar {
+	position: absolute;
+	inset-block-end: 0;
+	inset-inline-start: 0;
+	width: 100%;
+	height: 3px;
+	background-color: transparent;
+}
+.ToastProgressBar-Value {
+	position: absolute;
+	left: 0;
+	width: 0;
+	height: 3px;
+	background-color: #fff;
+}
+@keyframes ToastFadeIn {
+	from {
+		bottom: -2vw;
+		opacity: 0;
+	}
+	to {
+		bottom: 0;
+		opacity: 1;
+	}
+}
+@keyframes ToastFadeOut {
+	from {
+		opacity: 1;
+	}
+	to {
+		transform: translateY(100%);
+		opacity: 0;
+	}
+}
+
+/*# sourceMappingURL=Toast.css.map */

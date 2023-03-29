@@ -22,89 +22,11 @@ $(() => {
 
 		$("#TheInput").attr("src", images[i]);
 
-		cropper = new Cropper(document.getElementById("TheInput"), {
-			autoCropArea: 1,
-			zoomOnWheel: false,
-			viewMode: 1,
-			toggleDragModeOnDblclick: false,
-		});
-
-		$(".AlbumButton").on("click", () => {
-			$.post("/submit",
-				{
-					"Image": images[i],
-					"Album": $(this).val(),
-					"Data": JSON.stringify(cropper.getData())
-				},
-				(response) => {
-					i++;
-					if (typeof images[i] !== "undefined") {
-						cropper.replace(images[i]);
-					}
-					else {
-						$("#TheAlbumButtons").hide();
-						ShowToast("Done with images. Double-Click on 'Crop All'", undefined, 20000);
-					}
-				}
-			).fail(() => {
-				ShowToast("ERROR");
-			});
-		});
-
 	});
 
 	// $("#DoCrop").on("click", () => {
 	// 	ShowToast("Did you mean to Double-Click?");
 	// });
-
-	$("#DoCrop").on("dblclick", () => {
-		$("#TheButtons").hide();
-		let DoingCropToast = ShowToast("Doing Crop. Wait!", undefined, 1200000);
-		$.get("/crop",
-			(response) => {
-				ShowToast("Crop Done! Now go get some coffee!", undefined, 1200000);
-				console.log("Crop Done! Now go get some coffee!");
-				console.log(response);
-				DoingCropToast.Dismiss();
-			}
-		).fail(() => {
-			ShowToast("ERROR");
-		});
-	});
-
-	$("#GoToImage-Button").on("click", () => {
-		let NewIndex = $("#GoToImage-Index").val();
-
-		if (typeof images[NewIndex] !== "undefined") {
-			ShowToast("Went to image " + NewIndex);
-			i = NewIndex;
-			cropper.replace(images[i]);
-		}
-		else {
-			ShowToast("Index doesn't exist. the max index is " + (images.length - 1));
-		}
-	});
-
-	$("#Preset-Square").on("click", () => {
-		let ImageData = cropper.getImageData();
-		let a = Math.min(ImageData.naturalWidth, ImageData.naturalHeight);
-
-		cropper.setData({
-			x: (ImageData.naturalWidth - a) / 2,
-			y: (ImageData.naturalHeight - a) / 2,
-			width: a,
-			height: a,
-		});
-	});
-
-	$("#Preset-IGStory").on("click", () => {
-		cropper.setData({
-			x: 0,
-			y: 200,
-			width: 1080,
-			height: 1920,
-		});
-	});
 });
 
 function ShowToast(myToastText = "", ToastBackColor = null, ToastDuration = 5000, Options = []) {

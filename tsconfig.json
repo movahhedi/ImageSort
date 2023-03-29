@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"noImplicitAny": false,
+		"target": "es2017",
+		"module": "es2022",
+		"lib": ["ES2022", "DOM", "DOM.Iterable"],
+		"moduleResolution": "node",
+		"removeComments": false,
+		"preserveConstEnums": true,
+		"sourceMap": true,
+		"jsx": "react-jsx",
+		"jsxImportSource": "lestin",
+		"esModuleInterop": true,
+		"resolveJsonModule": true,
+		"allowSyntheticDefaultImports": true,
+		"typeRoots": [
+			"./node_modules/@types",
+			"./@types"
+		]
+	}
+}
