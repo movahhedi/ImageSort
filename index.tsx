@@ -1,10 +1,12 @@
+import { ShowToast } from "./assets/Toast";
 import $ from "jquery";
 import Cropper from "cropperjs";
 import "cropperjs/dist/cropper.min.css";
 
-const API_URL = "http://localhost:3000";
+// @ts-ignore ts(2339)
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
-const ShowToast = console.log;
+// const ShowToast = console.log;
 
 let TheInput = (<img id="TheInput" />) as HTMLImageElement;
 
@@ -13,9 +15,13 @@ let images = [],
 	cropper: Cropper;
 
 let fetch_response = await fetch(API_URL + "/initials"),
-	response: any = await fetch_response.json();
-console.log(response);
-// response = JSON.parse(response);
+	response = await fetch_response.json();
+
+const PresetButton = ({ Name, onClick }) => (
+	<button type="button" class="Button Green" onClick={onClick}>
+		{Name}
+	</button>
+);
 
 let TheAlbumButtons = (
 	<div id="TheAlbumButtons">
@@ -24,10 +30,8 @@ let TheAlbumButtons = (
 				type="button"
 				class="Button AlbumButton"
 				onClick={() => {
-					let formData = new FormData();
-					formData.append("Image", images[i]);
-					formData.append("Album", album);
-					formData.append("Data", JSON.stringify(cropper.getData()));
+					const cropper_Data = cropper.getData();
+					console.log("Last Crop Data", cropper_Data);
 
 					fetch(API_URL + "/submit", {
 						method: "POST",
@@ -36,9 +40,8 @@ let TheAlbumButtons = (
 						body: JSON.stringify({
 							Image: images[i],
 							Album: album,
-							Data: JSON.stringify(cropper.getData()),
+							Data: JSON.stringify(cropper_Data),
 						}),
-						// headers: { "Content-Type": "application/x-www-form-urlencoded" },
 						headers: { "Content-Type": "application/json" },
 					})
 						.then((response) => response.json())
@@ -67,10 +70,13 @@ let TheAlbumButtons = (
 
 images = response.Images;
 
-if (!images) {
+if (!images.length) {
+	ShowToast("No Images left.");
 	console.log("No Images left.");
 }
-TheInput.src = API_URL + "/" + (images[i] ?? "");
+else {
+	TheInput.src = API_URL + "/" + (images[i] ?? "");
+}
 
 let InitialBody = (
 	<div>
@@ -106,10 +112,8 @@ let InitialBody = (
 			</div>
 
 			<div>
-				<button
-					type="button"
-					class="Button Green"
-					id="Preset-IGStory"
+				<PresetButton
+					Name="IG Story"
 					onClick={() => {
 						cropper.setData({
 							x: 0,
@@ -118,13 +122,9 @@ let InitialBody = (
 							height: 1920,
 						});
 					}}
-				>
-					IG Story
-				</button>
-				<button
-					type="button"
-					class="Button Green"
-					id="Preset-Square"
+				/>
+				<PresetButton
+					Name="Square"
 					onClick={() => {
 						let ImageData = cropper.getImageData();
 						let a = Math.min(ImageData.naturalWidth, ImageData.naturalHeight);
@@ -136,9 +136,18 @@ let InitialBody = (
 							height: a,
 						});
 					}}
-				>
-					Square
-				</button>
+				/>
+				<PresetButton
+					Name="Abank Receipt"
+					onClick={() => {
+						cropper.setData({
+							x: 0,
+							y: 290,
+							width: 1080,
+							height: 1390,
+						});
+					}}
+				/>
 			</div>
 
 			<div>
@@ -146,8 +155,8 @@ let InitialBody = (
 					type="number"
 					class="InputText"
 					id="GoToImage-Index"
-					value={response.AI}
-					placeholder={" 0 - " + response.AI}
+					value={response.AI > images.length ? 0 : response.AI}
+					placeholder={" 0 - " + images.length}
 				/>
 				<button
 					type="button"

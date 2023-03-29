@@ -48,14 +48,14 @@ p {
 	outline: 0;
 	transition: all 0.25s cubic-bezier(0.53, 0.01, 0.35, 1.5);
 	margin-top: 10px;
-}
-.Button.Red {
-	background-color: #f52a2a;
-	border-color: #f52a2a;
-}
-.Button.Green {
-	background-color: #47b35f;
-	border-color: #47b35f;
+	&.Red {
+		background-color: #f52a2a;
+		border-color: #f52a2a;
+	}
+	&.Green {
+		background-color: #47b35f;
+		border-color: #47b35f;
+	}
 }
 .InputText {
 	display: inline-block;

@@ -1,35 +1,4 @@
-$(() => {
-	let images = [];
-	let cropper;
-	let i = 0;
-
-	$.get("/initials", (response) => {
-		console.log(response);
-		// response = JSON.parse(response);
-		response.Albums.forEach(element => {
-			let b = document.createElement("button");
-			b.type = "button";
-			b.className = "Button AlbumButton";
-			b.value = element;
-			b.textContent = element;
-			$("#TheAlbumButtons").append(b);
-		});
-
-		document.getElementById("GoToImage-Index").value = response.AI;
-		document.getElementById("GoToImage-Index").placeholder = " 0 - " + response.AI;
-
-		images = response.Images;
-
-		$("#TheInput").attr("src", images[i]);
-
-	});
-
-	// $("#DoCrop").on("click", () => {
-	// 	ShowToast("Did you mean to Double-Click?");
-	// });
-});
-
-function ShowToast(myToastText = "", ToastBackColor = null, ToastDuration = 5000, Options = []) {
+export function ShowToast(myToastText = "", ToastBackColor = null, ToastDuration = 5000, Options = []) {
 	var myToast = document.createElement("div");
 	myToast.className = "Toast";
 	myToast.IsPinned = Options["IsPinned"] ?? false;
