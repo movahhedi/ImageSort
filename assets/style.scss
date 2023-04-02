@@ -1,7 +1,11 @@
+$Font-English: "Segoe UI", "Segoe Pro", sans-serif;
+$Font-Mono: "Consolas", monospace;
+
 body {
 	margin: 0;
 	padding: 0;
 	background-color: #1e1e2a;
+	font-family: $Font-English;
 }
 p {
 	margin: 0;
@@ -28,7 +32,7 @@ p {
 	position: relative;
 	display: inline-block;
 	font-size: 16px;
-	font-family: "Segoe UI", sans-serif;
+	font-family: $Font-English;
 	text-align: center;
 	/* margin: 0.5vw 0.75vw; */
 	margin-inline-start: 2%;
@@ -62,10 +66,13 @@ p {
 	width: 100%;
 	padding: 0.5vw 1vw;
 	font-size: 16px;
-	font-family: "Segoe UI", sans-serif;
+	font-family: $Font-English;
 	color: #fff;
 	background-color: #2c2c3d;
 	border: 1px solid #2c2c3d;
 	border-radius: 25px;
 	box-sizing: border-box;
+}
+#ToastBox {
+	direction: rtl;
 }

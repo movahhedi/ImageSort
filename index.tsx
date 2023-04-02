@@ -1,7 +1,9 @@
-import { ShowToast } from "./assets/Toast";
+import { ShowToast, ToastType } from "toastification/Toast";
+import "toastification/dist/Toast.css";
 import $ from "jquery";
 import Cropper from "cropperjs";
 import "cropperjs/dist/cropper.min.css";
+import("@fortawesome/fontawesome-free/js/all.min.js");
 
 // @ts-ignore ts(2339)
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
@@ -53,12 +55,12 @@ let TheAlbumButtons = (
 								cropper.replace(images[i]);
 							} else {
 								$("#TheAlbumButtons").hide();
-								ShowToast("Done with images. Double-Click on 'Crop All'", undefined, 20000);
+								ShowToast(ToastType.Info, "Done with images. Double-Click on 'Crop All'", { Duration: 20000 });
 							}
 						})
 						.catch((error) => {
 							console.error(error);
-							ShowToast("ERROR");
+							ShowToast(ToastType.Error, "ERROR");
 						});
 				}}
 			>
@@ -71,8 +73,8 @@ let TheAlbumButtons = (
 images = response.Images;
 
 if (!images.length) {
-	ShowToast("No Images left.");
-	console.log("No Images left.");
+	ShowToast(ToastType.Error, "No Images left");
+	console.log("No Images left");
 }
 else {
 	TheInput.src = API_URL + "/" + (images[i] ?? "");
@@ -92,18 +94,18 @@ let InitialBody = (
 					id="DoCrop"
 					onClick={() => {
 						$("#TheButtons").hide();
-						let DoingCropToast = ShowToast("Doing Crop. Wait!", undefined, 1200000);
+						let DoingCropToast = ShowToast(ToastType.Info, "Doing Crop. Wait!", { Duration: 1200000 });
 						fetch(API_URL + "/crop")
 							.then((response) => response.json())
 							.then((response) => {
-								ShowToast("Crop Done! Now go get some coffee!", undefined, 1200000);
+								ShowToast(ToastType.Successful, "Crop Done! Now go get some coffee!", { Duration: 1200000 });
 								console.log("Crop Done! Now go get some coffee!");
 								console.log(response);
 								// DoingCropToast.Dismiss();
 							})
 							.catch((error) => {
 								console.error(error);
-								ShowToast("ERROR");
+								ShowToast(ToastType.Error, "ERROR");
 							});
 					}}
 				>
@@ -166,11 +168,11 @@ let InitialBody = (
 						let NewIndex = +($("#GoToImage-Index").val() as string);
 
 						if (typeof images[NewIndex] !== "undefined") {
-							ShowToast("Went to image " + NewIndex);
+							ShowToast(ToastType.Info, "Went to image " + NewIndex);
 							i = NewIndex;
 							cropper.replace(images[i]);
 						} else {
-							ShowToast("Index doesn't exist. the max index is " + (images.length - 1));
+							ShowToast(ToastType.Error, "Index doesn't exist. the max index is " + (images.length - 1));
 						}
 					}}
 				>
