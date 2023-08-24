@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
 		"noImplicitAny": false,
-		"target": "es2017",
+		"target": "ES2022",
 		"module": "es2022",
 		"lib": ["ES2022", "DOM", "DOM.Iterable"],
 		"moduleResolution": "node",
@@ -13,10 +13,6 @@
 		"esModuleInterop": true,
 		"resolveJsonModule": true,
 		"allowSyntheticDefaultImports": true,
-		"typeRoots": [
-			"./node_modules/@types",
-			"./@types"
-		],
 		"types": [
 			"vite/client",
 			"jquery"

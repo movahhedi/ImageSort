@@ -4,7 +4,7 @@
 
 import bodyParser from "body-parser";
 import express from "express";
-import glob from "glob";
+import { glob } from "glob";
 import * as fs from "fs";
 import * as fsPromises from "fs/promises";
 import * as path from "path";

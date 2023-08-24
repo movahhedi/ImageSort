@@ -14,6 +14,7 @@ p {
 #InputPicDiv {
 	display: inline-block;
 	width: 70vw;
+	height: 100%;
 	vertical-align: top;
 	direction: rtl;
 }
@@ -25,8 +26,10 @@ p {
 #TheInput,
 #cropper-container {
 	display: block;
-	max-width: 99%;
-	max-height: 95vh;
+	// max-width: 99%;
+	// max-height: 100%;
+	width: 100%;
+	height: 100%;
 }
 .Button {
 	position: relative;

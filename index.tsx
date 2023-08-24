@@ -31,37 +31,37 @@ let TheAlbumButtons = (
 			<button
 				type="button"
 				class="Button AlbumButton"
-				onClick={() => {
+				onClick={async () => {
 					const cropper_Data = cropper.getData();
 					console.log("Last Crop Data", cropper_Data);
 
-					fetch(API_URL + "/submit", {
-						method: "POST",
-						mode: "cors",
-						// body: formData,
-						body: JSON.stringify({
-							Image: images[i],
-							Album: album,
-							Data: JSON.stringify(cropper_Data),
-						}),
-						headers: { "Content-Type": "application/json" },
-					})
-						.then((response) => response.json())
-						.then((response) => {
-							console.log(response);
-
-							i++;
-							if (typeof images[i] !== "undefined") {
-								cropper.replace(images[i]);
-							} else {
-								$("#TheAlbumButtons").hide();
-								ShowToast(ToastType.Info, "Done with images. Double-Click on 'Crop All'", { Duration: 20000 });
-							}
-						})
-						.catch((error) => {
-							console.error(error);
-							ShowToast(ToastType.Error, "ERROR");
+					try {
+						let response = await fetch(API_URL + "/submit", {
+							method: "POST",
+							mode: "cors",
+							// body: formData,
+							body: JSON.stringify({
+								Image: images[i],
+								Album: album,
+								Data: JSON.stringify(cropper_Data),
+							}),
+							headers: { "Content-Type": "application/json" },
 						});
+						response = await response.json();
+
+						console.log(response);
+
+						i++;
+						if (typeof images[i] !== "undefined") {
+							cropper.replace(images[i]);
+						} else {
+							$("#TheAlbumButtons").hide();
+							ShowToast(ToastType.Info, "Done with images. Double-Click on 'Crop All'", { Duration: 20000 });
+						}
+					} catch (error) {
+						console.error(error);
+						ShowToast(ToastType.Error, "ERROR");
+					}
 				}}
 			>
 				{album}
