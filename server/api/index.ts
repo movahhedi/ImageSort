@@ -33,25 +33,6 @@ app.use("/assets", express.static("assets"));
 // });
 
 app.get("/initials", async (req, res) => {
-	glob("data/input/{*.jpg,*.jpeg,*.png,*.gif,*.JPG,*.JPEG,*.PNG,*.GIF}").then((Images) => {
-		let Albums = fs.readFileSync(AlbumsFile, "utf8");
-		Albums = JSON.parse(Albums);
-		let AI = 0;
-
-		ImagesGlob = Images;
-
-		if (fs.existsSync(AIFile)) AI = +fs.readFileSync(AIFile, "utf8");
-		fs.writeFileSync(AIFile, AI.toString());
-
-		res.set("Content-Type", "application/json; charset=utf-8");
-		res.send(
-			JSON.stringify({
-				Albums: Albums,
-				Images: Images,
-				AI: AI,
-			})
-		);
-	});
 });
 
 app.post("/submit", (req, res) => {
@@ -211,8 +192,4 @@ app.get("/crop", (req, res) => {
 			})
 		);
 	}
-});
-
-app.listen(SERVER_PORT, () => {
-	console.log("Started on http://localhost:" + SERVER_PORT);
 });

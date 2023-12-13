@@ -28,6 +28,7 @@
 		"@types/koa-compose": "^3.2.8",
 		"@types/koa-compress": "^4.0.6",
 		"@types/koa-json": "^2.0.23",
+		"@types/koa-static": "^4.0.4",
 		"@types/koa__cors": "^4.0.3",
 		"@types/koa__router": "^12.0.4",
 		"@types/node": "^20.10.4",
@@ -56,12 +57,15 @@
 	"dependencies": {
 		"@koa/cors": "^4.0.0",
 		"@koa/router": "^12.0.1",
+		"cors": "^2.8.5",
 		"dotenv": "^16.3.1",
 		"koa": "^2.14.2",
 		"koa-body": "^6.0.1",
 		"koa-bodyparser": "^4.4.1",
 		"koa-compose": "^4.1.0",
 		"koa-compress": "^5.1.1",
-		"koa-json": "^2.0.2"
+		"koa-json": "^2.0.2",
+		"koa-static": "^5.0.0",
+		"sharp": "^0.33.0"
 	}
 }

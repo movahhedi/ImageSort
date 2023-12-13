@@ -1,8 +1,43 @@
-node_modules
-data
-dist
-temp
+# Secrets
+[Ss]ecret.*
+[Cc]onfig.php
+*.sql
 *.env
 *.env.*
-!*.env.template
+!.env.template
+*.local
+
+# Setup samples
+!/setup
+
+# Temps
+**/[Tt]emp
+**/[Tt]emps
+**/.DS_Store
+**/._.DS_Store
+vite.config.*.timestamp-*
 *.log
+yarn-error.log
+
+# Packages
+node_modules
+node_modules*
+vendor
+.pnp.*
+**/.yarn/*
+!**/.yarn/patches
+!**/.yarn/plugins
+!**/.yarn/releases
+!**/.yarn/sdks
+!**/.yarn/versions
+.parcel-cache
+
+# The Build
+build
+dist
+
+# Variable Data
+data
+/src/data
+/api/data
+/server/api/data

@@ -1,4 +1,4 @@
-import { ShowToast, ToastType } from "toastification/Toast";
+import { ShowToast, ToastType } from "toastification";
 import "toastification/dist/Toast.css";
 import $ from "jquery";
 import Cropper from "cropperjs";
@@ -56,7 +56,7 @@ let TheAlbumButtons = (
 							cropper.replace(images[i]);
 						} else {
 							$("#TheAlbumButtons").hide();
-							ShowToast(ToastType.Info, "Done with images. Double-Click on 'Crop All'", { Duration: 20000 });
+							ShowToast(ToastType.Info, "Done with images. Double-Click on 'Crop All'", { duration: 20000 });
 						}
 					} catch (error) {
 						console.error(error);
@@ -94,11 +94,11 @@ let InitialBody = (
 					id="DoCrop"
 					onClick={() => {
 						$("#TheButtons").hide();
-						let DoingCropToast = ShowToast(ToastType.Info, "Doing Crop. Wait!", { Duration: 1200000 });
+						let DoingCropToast = ShowToast(ToastType.Info, "Doing Crop. Wait!", { duration: 1200000 });
 						fetch(API_URL + "/crop")
 							.then((response) => response.json())
 							.then((response) => {
-								ShowToast(ToastType.Successful, "Crop Done! Now go get some coffee!", { Duration: 1200000 });
+								ShowToast(ToastType.Successful, "Crop Done! Now go get some coffee!", { duration: 1200000 });
 								console.log("Crop Done! Now go get some coffee!");
 								console.log(response);
 								// DoingCropToast.Dismiss();
