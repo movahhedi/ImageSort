@@ -1,0 +1,5 @@
+{
+	"watch": ["api"],
+	"ext": "ts,js,mjs,cjs,json",
+	"exec": "node --no-warnings --experimental-specifier-resolution=node --experimental-loader ts-node/esm --inspect api\\index.ts\""
+}

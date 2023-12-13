@@ -1,0 +1,10 @@
+defaults
+> 0.3%
+> 0.3% in IR
+chrome > 23
+ff > 23
+safari >= 7
+opera >= 23
+ie >= 11
+android >= 4
+ios >= 7

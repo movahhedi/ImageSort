@@ -1,0 +1,67 @@
+{
+	"name": "imagesort-server",
+	"version": "2.0.0",
+	"contributors": [
+		{
+			"name": "Shahab Movahhedi",
+			"email": "dev@shmovahhedi.com",
+			"url": "https://shmovahhedi.com"
+		}
+	],
+	"license": "MIT",
+	"type": "module",
+	"scripts": {
+		"start": "npx vite-node --watch api/index.ts",
+		"dev": "npx vite-node --watch api/index.ts",
+		"server": "yarn start",
+		"types": "tsc --noEmit",
+		"lint": "eslint \"./api/\" --ext \".ts,.tsx,.js,.jsx\" --fix --no-eslintrc --config \"../.eslintrc.json\" --parser-options project:tsconfig.json",
+		"format": "prettier \"./api/**/*.{js,jsx,ts,tsx}\" --write --config \"../.prettierrc.json\"",
+		"fl:server": "concurrently -m 1 -c \"bgGreen,bgMagenta\" \"npm:format\" \"npm:lint\"",
+		"start:inspect2": "nodemon -e ts,js,mjs,cjs,json --exec \"node --experimental-specifier-resolution=node --loader ts-node/esm --inspect api\\index.ts\"",
+		"start:inspect": "nodemon -e ts,js,mjs,cjs,json --exec \"node --experimental-specifier-resolution=node --require ts-node/register --loader ts-node/esm --inspect api\\index.ts\"",
+		"update": "npx npm-check-updates",
+		"clear": "rimraf -G dist build"
+	},
+	"devDependencies": {
+		"@types/koa": "^2.13.12",
+		"@types/koa-compose": "^3.2.8",
+		"@types/koa-compress": "^4.0.6",
+		"@types/koa-json": "^2.0.23",
+		"@types/koa__cors": "^4.0.3",
+		"@types/koa__router": "^12.0.4",
+		"@types/node": "^20.10.4",
+		"@typescript-eslint/eslint-plugin": "^6.13.2",
+		"@typescript-eslint/parser": "^6.13.2",
+		"colors": "^1.4.0",
+		"concurrently": "^8.2.2",
+		"esbuild": "^0.19.9",
+		"eslint": "^8.55.0",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-plugin-prettier": "^5.0.1",
+		"eslint-plugin-react": "^7.33.2",
+		"nodemon": "^3.0.2",
+		"npm-check-updates": "^16.14.11",
+		"prettier": "^3.1.1",
+		"prettier-eslint-cli": "^8.0.1",
+		"process": "^0.11.10",
+		"terser": "^5.26.0",
+		"ts-node": "^10.9.2",
+		"tslib": "^2.6.2",
+		"typescript": "^5.3.3",
+		"vite": "4.5.1",
+		"vite-node": "^1.0.4",
+		"vite-plugin-node": "^3.1.0"
+	},
+	"dependencies": {
+		"@koa/cors": "^4.0.0",
+		"@koa/router": "^12.0.1",
+		"dotenv": "^16.3.1",
+		"koa": "^2.14.2",
+		"koa-body": "^6.0.1",
+		"koa-bodyparser": "^4.4.1",
+		"koa-compose": "^4.1.0",
+		"koa-compress": "^5.1.1",
+		"koa-json": "^2.0.2"
+	}
+}

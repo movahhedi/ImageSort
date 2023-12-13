@@ -1,0 +1,68 @@
+{
+	"name": "imagesort-client",
+	"version": "2.0.0",
+	"contributors": [
+		{
+			"name": "Shahab Movahhedi",
+			"email": "dev@shmovahhedi.com",
+			"url": "https://shmovahhedi.com"
+		}
+	],
+	"license": "MIT",
+	"type": "module",
+	"main": "src/index.html",
+	"scripts": {
+		"start": "vite",
+		"dev": "vite",
+		"client": "yarn start",
+		"build": "vite build --force",
+		"prod": "yarn production",
+		"production": "vite build --force",
+		"types": "tsc --noEmit",
+		"lint": "concurrently -m 1 -c \"bgBlue,bgYellow,bgGreen\" \"npm:lint:*\"",
+		"lint:styles": "stylelint \"./src/**/*.scss\" --fix --config \"../.stylelintrc.json\"",
+		"lint:scripts": "eslint \"./src/\" --ext \".ts,.tsx,.js,.jsx\" --fix --no-eslintrc --config \"../.eslintrc.json\" --parser-options project:tsconfig.json",
+		"format": "concurrently -m 1 -c \"bgBlue,bgYellow,bgGreen\" \"npm:format:*\"",
+		"format:styles": "prettier \"./src/**/*.scss\" --write --config \"../.prettierrc.json\"",
+		"format:scripts": "prettier \"./src/**/*.{js,jsx,ts,tsx}\" --write --config \"../.prettierrc.json\"",
+		"fl": "concurrently -m 1 -c \"bgGreen,bgMagenta\" \"npm:format\" \"npm:lint\"",
+		"fl:styles": "concurrently -m 1 -c \"bgGreen,bgMagenta\" \"npm:format:styles\" \"npm:lint:styles\"",
+		"fl:scripts": "concurrently -m 1 -c \"bgGreen,bgMagenta\" \"npm:format:scripts\" \"npm:lint:scripts\"",
+		"update": "npx npm-check-updates -i",
+		"clear": "rimraf -G dist build"
+	},
+	"devDependencies": {
+		"@types/node": "^20.10.4",
+		"@typescript-eslint/eslint-plugin": "^6.13.2",
+		"@typescript-eslint/parser": "^6.13.2",
+		"@vitejs/plugin-legacy": "^5.2.0",
+		"axios": "^1.6.2",
+		"browserslist": "^4.22.2",
+		"compressorjs": "^1.2.1",
+		"cropperjs": "^1.5.13",
+		"jquery": "^3.7.0",
+		"concurrently": "^8.2.2",
+		"eslint": "^8.55.0",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-plugin-prettier": "^5.0.1",
+		"eslint-plugin-react": "^7.33.2",
+		"lestin": "^0.0.14",
+		"npm-check-updates": "^16.14.11",
+		"postcss": "^8.4.32",
+		"prettier": "^3.1.1",
+		"prettier-eslint-cli": "^8.0.1",
+		"sass": "^1.69.5",
+		"stylelint": "^16.0.1",
+		"stylelint-config-standard-scss": "^11.1.0",
+		"stylelint-order": "^6.0.4",
+		"stylelint-scss": "^5.3.1",
+		"terser": "^5.26.0",
+		"toastification": "^0.1.1",
+		"typescript": "^5.3.3",
+		"vite": "^5.0.7"
+	},
+	"dependencies": {
+		"@fortawesome/fontawesome-free": "^6.5.1",
+		"vazirmatn": "^33.0.3"
+	}
+}

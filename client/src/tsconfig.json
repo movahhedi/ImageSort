@@ -1,9 +1,9 @@
 {
 	"compilerOptions": {
 		"noImplicitAny": false,
-		"target": "ES2022",
-		"module": "es2022",
-		"lib": ["ES2022", "DOM", "DOM.Iterable"],
+		"target": "es2020",
+		"module": "es2020",
+		"lib": ["ES2019", "DOM", "DOM.Iterable"],
 		"moduleResolution": "node",
 		"removeComments": false,
 		"preserveConstEnums": true,
@@ -13,9 +13,9 @@
 		"esModuleInterop": true,
 		"resolveJsonModule": true,
 		"allowSyntheticDefaultImports": true,
-		"types": [
-			"vite/client",
-			"jquery"
-		]
-	}
+		"typeRoots": ["./node_modules/@types/", "./types", "./node_modules"],
+		"types": ["vite/client"]
+	},
+	// "include": ["src/scripts/**/*.ts", "src/scripts/**/*.tsx"],
+	"exclude": ["node_modules", "**/*.spec.ts"]
 }
