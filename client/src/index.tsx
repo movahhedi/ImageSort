@@ -41,9 +41,9 @@ let TheAlbumButtons = (
 							mode: "cors",
 							// body: formData,
 							body: JSON.stringify({
-								Image: images[i],
-								Album: album,
-								Data: JSON.stringify(cropper_Data),
+								image: images[i],
+								album,
+								data: cropper_Data,
 							}),
 							headers: { "Content-Type": "application/json" },
 						});

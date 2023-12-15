@@ -1,0 +1,102 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Server",
+			"type": "node",
+			"request": "launch",
+			"runtimeExecutable": "npx",
+			"args": ["nodemon"],
+			// "args": ["${relativeFile}"],
+			// "runtimeArgs": ["-r", "ts-node/register"],
+			// "runtimeArgs": ["--loader", "ts-node/esm"],
+			"cwd": "${workspaceRoot}/server",
+			// "protocol": "inspector",
+			"internalConsoleOptions": "openOnSessionStart",
+			"skipFiles": ["<node_internals>/**", "node_modules/**"],
+			"outputCapture": "std"
+		},
+		{
+			"name": "Server2",
+			"type": "node",
+			"request": "launch",
+			"runtimeExecutable": "node",
+			"args": [
+				"--no-warnings",
+				"--watch",
+				"--experimental-specifier-resolution=node",
+				"--loader",
+				"ts-node/esm",
+				"api\\index.ts"
+			],
+			// "args": ["${relativeFile}"],
+			// "runtimeArgs": ["-r", "ts-node/register"],
+			// "runtimeArgs": ["--loader", "ts-node/esm"],
+			"cwd": "${workspaceRoot}/server",
+			// "protocol": "inspector",
+			"internalConsoleOptions": "openOnSessionStart",
+			"skipFiles": ["<node_internals>/**", "node_modules/**"],
+			"outputCapture": "std"
+		},
+		{
+			"name": "Server3",
+			"type": "node",
+			"request": "launch",
+			"runtimeExecutable": "npx",
+			"args": ["vite-node", "--watch", "api/index.ts"],
+			// "args": ["${relativeFile}"],
+			// "runtimeArgs": ["-r", "ts-node/register"],
+			// "runtimeArgs": ["--loader", "ts-node/esm"],
+			"cwd": "${workspaceRoot}/server",
+			// "protocol": "inspector",
+			"internalConsoleOptions": "openOnSessionStart",
+			"skipFiles": ["<node_internals>/**", "node_modules/**"],
+			"outputCapture": "std"
+		},
+		{
+			"name": "Server",
+			"type": "node",
+			"request": "launch",
+			"runtimeExecutable": "npx",
+			"args": ["vite-node", "--watch", "api/index.ts"],
+			// "args": ["${relativeFile}"],
+			// "runtimeArgs": ["-r", "ts-node/register"],
+			// "runtimeArgs": ["--loader", "ts-node/esm"],
+			"cwd": "${workspaceRoot}/server",
+			// "protocol": "inspector",
+			"internalConsoleOptions": "openOnSessionStart",
+			"skipFiles": ["<node_internals>/**", "node_modules/**"],
+			"outputCapture": "std"
+		},
+		{
+			"name": "Client",
+			"type": "chrome",
+			"request": "launch",
+			"url": "http://localhost:5173",
+			"webRoot": "${workspaceFolder}/client/src",
+			"runtimeArgs": ["--remote-debugging-port=9222"],
+			"sourceMaps": true,
+			"preLaunchTask": "client",
+			"outputCapture": "std"
+		}
+		/*{
+			"name": "Launch Vite DEV server",
+			"type": "node",
+			"request": "launch",
+			"runtimeExecutable": "npx",
+			"runtimeArgs": ["vite"],
+			"cwd": "${workspaceRoot}/client",
+			"serverReadyAction": {
+				"action": "debugWithChrome",
+				// "pattern": "Local:http://localhost:([0-9]+)",
+				"uriFormat": "http://localhost:5173"
+			}
+		}*/
+	],
+	"compounds": [
+		{
+			"name": "Server/Client",
+			"configurations": ["Server", "Client"]
+		}
+	]
+}

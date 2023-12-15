@@ -13,7 +13,6 @@
 		"moduleResolution": "node",
 		"allowImportingTsExtensions": false,
 		"noEmit": false,
-		"typeRoots": ["./node_modules/@types", "./@types", "./node_modules"],
 		"declaration": true,
 		"strict": true,
 		"baseUrl": "./api",
