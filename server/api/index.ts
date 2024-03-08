@@ -2,7 +2,6 @@ import Koa from "koa";
 import KoaJson from "koa-json";
 import KoaCompress from "koa-compress";
 import { koaBody } from "koa-body";
-import Serve from "koa-static";
 import KoaCors from "@koa/cors";
 import KoaRouter from "@koa/router";
 import { type Server } from "http";
@@ -11,6 +10,7 @@ import Colors from "colors/safe";
 import { glob } from "glob";
 import { existsSync as exists } from "fs";
 // eslint-disable-next-line @typescript-eslint/naming-convention
+import * as fsNormal from "fs";
 import * as fs from "fs/promises";
 import * as Path from "path";
 import Sharp from "sharp";
@@ -51,7 +51,7 @@ export class App {
 			.use(KoaCompress())
 			.use(
 				koaBody({
-					multipart: true,
+					// multipart: true,
 					/*formidable: {
 						uploadDir: path.join(__dirname, '/public/uploads'),
 						keepExtensions: true,
@@ -85,8 +85,9 @@ export class App {
 		// Yes, the errorhandler is added twice, once at the top, once before adding the router. This is intentional.
 		this.#koa.use(this.errorHandler);
 
-		this.#router.use("/data/input", Serve("data/input"));
-		this.#router.use("/assets", Serve("assets"));
+		this.#router.get("/data/input/:name", async (ctx, next) => {
+			ctx.body = fsNormal.createReadStream(`./data/input/${ctx.params.name}`);
+		});
 
 		this.#router.get("/initials", async (ctx, next) => {
 			imagesGlob = await glob("data/input/{*.jpg,*.jpeg,*.png,*.gif,*.JPG,*.JPEG,*.PNG,*.GIF}");

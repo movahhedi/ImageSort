@@ -13,7 +13,7 @@
 		"esModuleInterop": true,
 		"resolveJsonModule": true,
 		"allowSyntheticDefaultImports": true,
-		"typeRoots": ["./node_modules/@types/", "./types", "./node_modules"]
+		// "typeRoots": ["./node_modules/@types/", "./types", "./node_modules"]
 	},
 	// "include": ["src/scripts/**/*.ts", "src/scripts/**/*.tsx"],
 	"exclude": ["node_modules", "**/*.spec.ts"]

@@ -6,7 +6,7 @@ import "cropperjs/dist/cropper.min.css";
 import("@fortawesome/fontawesome-free/js/all.min.js");
 
 // @ts-ignore ts(2339)
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 
 // const ShowToast = console.log;
 
@@ -16,8 +16,10 @@ let images = [],
 	i = 0,
 	cropper: Cropper;
 
-let fetch_response = await fetch(API_URL + "/initials"),
-	response = await fetch_response.json();
+let fetch_response = await fetch(API_URL + "/initials", {
+	// mode: "same-origin",
+});
+let response = await fetch_response.json();
 
 const PresetButton = ({ Name, onClick }) => (
 	<button type="button" class="Button Green" onClick={onClick}>
@@ -27,7 +29,7 @@ const PresetButton = ({ Name, onClick }) => (
 
 let TheAlbumButtons = (
 	<div id="TheAlbumButtons">
-		{response.Albums.map((album: any) => (
+		{response.albums.map((album: any) => (
 			<button
 				type="button"
 				class="Button AlbumButton"
@@ -53,7 +55,7 @@ let TheAlbumButtons = (
 
 						i++;
 						if (typeof images[i] !== "undefined") {
-							cropper.replace(images[i]);
+							cropper.replace(API_URL + "/" + (images[i] ?? ""));
 						} else {
 							$("#TheAlbumButtons").hide();
 							ShowToast(ToastType.Info, "Done with images. Double-Click on 'Crop All'", { duration: 20000 });
@@ -70,13 +72,12 @@ let TheAlbumButtons = (
 	</div>
 );
 
-images = response.Images;
+images = response.images;
 
 if (!images.length) {
 	ShowToast(ToastType.Error, "No Images left");
 	console.log("No Images left");
-}
-else {
+} else {
 	TheInput.src = API_URL + "/" + (images[i] ?? "");
 }
 
@@ -157,7 +158,7 @@ let InitialBody = (
 					type="number"
 					class="InputText"
 					id="GoToImage-Index"
-					value={response.AI > images.length ? 0 : response.AI}
+					value={response.ai > images.length ? 0 : response.ai}
 					placeholder={" 0 - " + images.length}
 				/>
 				<button
@@ -170,7 +171,7 @@ let InitialBody = (
 						if (typeof images[NewIndex] !== "undefined") {
 							ShowToast(ToastType.Info, "Went to image " + NewIndex);
 							i = NewIndex;
-							cropper.replace(images[i]);
+							cropper.replace(API_URL + "/" + (images[i] ?? ""));
 						} else {
 							ShowToast(ToastType.Error, "Index doesn't exist. the max index is " + (images.length - 1));
 						}
