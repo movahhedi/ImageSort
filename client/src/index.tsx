@@ -158,7 +158,8 @@ let InitialBody = (
 							x: 0,
 							y: 290,
 							width: 1080,
-							height: 1390,
+							// height: 1390,
+							height: 1570,
 						});
 					}}
 				/>
