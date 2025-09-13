@@ -127,6 +127,17 @@ let InitialBody = (
 					}}
 				/>
 				<PresetButton
+					Name="IG Reel"
+					onClick={() => {
+						cropper.setData({
+							x: 0,
+							y: 223,
+							width: 1080,
+							height: 1920,
+						});
+					}}
+				/>
+				<PresetButton
 					Name="Square"
 					onClick={() => {
 						let ImageData = cropper.getImageData();
